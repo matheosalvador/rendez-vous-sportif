@@ -8,6 +8,7 @@ class AddOrganizationMemberAction
         // Ajout d'un membre à l'organisation via Eloquent
         $organization = Organization::find($dto->id);
         $organization->members()->create([
+            'member_id' => $dto->member_id,
             'name' => $dto->name,
             'email' => $dto->email,
         ]);
