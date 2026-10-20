@@ -7,6 +7,7 @@ class StoreOrganizationAction
     {
         // Création de l’organisation via Eloquent
         $organization = Organization::create([
+            'id' => $dto->id,
             'name' => $dto->name,
             'description' => $dto->description,
             'members' => $dto->members,
