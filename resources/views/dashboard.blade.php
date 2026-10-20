@@ -12,6 +12,7 @@
                     <a href="{{ route('organizations.create') }}" class="text-blue-500 hover:text-blue-700">Create Organization</a>
                     <a href="{{ route('organizations.index') }}" class="text-blue-500 hover:text-blue-700">View Organizations</a> 
                     <a href="{{ route('organizations.edit') }}" class="text-blue-500 hover:text-blue-700">Edit Organization</a>
+                    <a href="{{ route('organizations.partials.member-list') }}" class="text-blue-500 hover:text-blue-700">View Member List</a>
                 </div>
             </div>
         </div>

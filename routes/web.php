@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/organizations/create', [OrganizationController::class, 'create'])->name('organizations.create');
     Route::get('/organizations/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
     Route::get('/organizations/index', [OrganizationController::class, 'index'])->name('organizations.index');
+    Route::get('/organizations/partials/member-list', [OrganizationController::class, 'memberList'])->name('organizations.partials.member-list');
 });
 
 require __DIR__.'/auth.php';

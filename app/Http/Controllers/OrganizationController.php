@@ -20,5 +20,10 @@ class OrganizationController extends Controller
     {
         return view('organizations.edit');
     }
+
+    public function memberList()
+    {
+        return view('organizations.partials.member-list');
+    }
 }
 ?>
