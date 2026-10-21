@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/organizations/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
     Route::get('/organizations/index', [OrganizationController::class, 'index'])->name('organizations.index');
     Route::get('/organizations/partials/member-list', [OrganizationController::class, 'memberList'])->name('organizations.partials.member-list');
+    Route::post('/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
 });
 
 require __DIR__.'/auth.php';

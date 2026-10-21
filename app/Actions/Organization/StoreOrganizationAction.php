@@ -1,16 +1,17 @@
 <?php
 
+namespace App\Actions\Organization;
+
 class StoreOrganizationAction
 {
 
-    public function execute(CreateOrganizationDTO $dto): Organization
+    public function execute(StoreOrganizationDTO $dto): Organization
     {
         // Création de l’organisation via Eloquent
         $organization = Organization::create([
-            'id' => $dto->id,
             'name' => $dto->name,
-            'description' => $dto->description,
-            'members' => $dto->members,
+            'slug' => $dto->slug,
+            'plan' => $dto->plan,
         ]);
         // Ici on pourrait déclencher un Event (ex : OrganizationCreated)
         return $organization;

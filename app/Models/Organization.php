@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Organization extends Model
 {
-    protected $fillable = ['name', 'slug', 'plan'];
+    protected $fillable = [
+        'name', 
+        'slug', 
+        'plan'
+    ];
+    
     // collectif possède plusieurs événements
     public function events(): HasMany
     {
