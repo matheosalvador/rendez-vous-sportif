@@ -2,22 +2,25 @@
 
 namespace App\DTOs\Organization;
 
+use App\Http\Requests\Organization\AddOrganizationMemberRequest;
+
+
 class OrganizationMemberDTO
 {
 
     public function __construct(
-        public readonly int $member_id,
-        public readonly string $member_name, 
-        public readonly string $email,
+        public readonly int $organization_id,
+        public readonly int $user_id,
+        public readonly string $role,
     ) {}        
 
     public static function fromRequest(AddOrganizationMemberRequest $request): self
     {
         // Retourne une nouvelle instance du DTO avec les données nécessaires
         return new self(
-            member_id: $request->member_id,
-            member_name: $request->member_name,
-            email: $request->email,
+            organization_id: $request->organization_id,
+            user_id: $request->user_id,
+            role: $request->role,
         );
     }
 }

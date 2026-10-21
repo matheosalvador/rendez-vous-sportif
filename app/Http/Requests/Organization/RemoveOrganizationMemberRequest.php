@@ -21,7 +21,7 @@ class RemoveOrganizationMemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'member_id' => ['required', 'integer'],
+            'id' => ['required', 'integer'],
         ];
     }
     /**
@@ -30,7 +30,7 @@ class RemoveOrganizationMemberRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'member_id.required' => 'L’ID du membre est obligatoire.',
+            'id.required' => 'L’ID du membre est obligatoire.',
         ];
     }
 }

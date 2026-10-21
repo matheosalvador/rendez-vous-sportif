@@ -21,7 +21,7 @@ class DeleteOrganizationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organization_id' => ['required', 'integer'],
+            'id' => ['required', 'integer'],
         ];
     }
     /**
@@ -30,8 +30,8 @@ class DeleteOrganizationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'organization_id.required' => 'L’ID est obligatoire.',
-            'organization_id.integer' => 'L’ID doit être un entier.',
+            'id.required' => 'L’ID est obligatoire.',
+            'id.integer' => 'L’ID doit être un entier.',
         ];
     }
 }

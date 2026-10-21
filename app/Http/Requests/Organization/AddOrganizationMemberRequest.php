@@ -21,9 +21,9 @@ class AddOrganizationMemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'member_id' => ['required', 'integer'],
-            'member_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'organization_id' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+            'role' => ['required', 'string', 'max:255'],
         ];
     }
     /**
@@ -32,9 +32,9 @@ class AddOrganizationMemberRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'member_id.required' => 'L’ID du membre est obligatoire.',
-            'member_name.required' => 'Le nom est obligatoire.',
-            'email.required' => 'L’e-mail est obligatoire.',
+            'organization_id.required' => 'L’ID de l’organisation est obligatoire.',
+            'user_id.required' => 'L’ID de l’utilisateur est obligatoire.',
+            'role.required' => 'Le rôle est obligatoire.',
         ];
     }
 }

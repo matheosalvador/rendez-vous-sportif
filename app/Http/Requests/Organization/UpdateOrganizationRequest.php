@@ -21,9 +21,8 @@ class UpdateOrganizationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organization_id' => ['required', 'integer'],
-            'organization_name' => ['required', 'string', 'max:255'],
-            'members' => ['nullable', 'array'],
+            'id' => ['required', 'integer'],
+            'name' => ['required', 'string', 'max:255'],
         ];
     }
     /**
@@ -32,8 +31,7 @@ class UpdateOrganizationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'organization_name.required' => 'Le nom est obligatoire.',
-            'members.required' => 'Les membres sont obligatoires.',
+            'name.required' => 'Le nom est obligatoire.',
         ];
     }
 }

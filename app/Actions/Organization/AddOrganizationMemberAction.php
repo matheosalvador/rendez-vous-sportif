@@ -2,19 +2,20 @@
 
 namespace App\Actions\Organization;
 
+use App\Models\OrganizationMember;
+
 class AddOrganizationMemberAction
 {
 
-    public function execute(AddOrganizationMemberDTO $dto): Organization
+    public function execute(AddOrganizationMemberDTO $dto): OrganizationMember
     {
         // Ajout d'un membre à l'organisation via Eloquent
-        $organization = Organization::find($dto->organization_id);
-        $organization->members()->create([
-            'member_id' => $dto->member_id,
-            'member_name' => $dto->member_name,
-            'email' => $dto->email,
+        $organizationMember = OrganizationMember::create([
+            'organization_id' => $dto->organization_id,
+            'user_id' => $dto->user_id,
+            'role' => $dto->role,
         ]);
         // Ici on pourrait déclencher un Event (ex : OrganizationCreated)
-        return $organization;
+        return $organizationMember;
     }
 }
