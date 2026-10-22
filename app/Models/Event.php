@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Event extends Model
 {
+    use HasFactory;// pour dire à Laravel que ce modèle peut être utilisé avec des factories pour générer des données de test
     protected $fillable = [
         'organization_id', 'sport_id', 'created_by', 
         'title', 'description', 'starts_at', 
