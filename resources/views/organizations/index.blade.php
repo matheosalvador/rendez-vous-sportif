@@ -46,9 +46,16 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
                                         <!-- Bouton Ajouter un membre -->
-                                        <a href="{{ route('organizations.add-member.form', $org) }}" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-900 font-semibold">
-                                            Rejoindre
-                                        </a>
+                                        <form method="POST" action="{{ route('organizations.addmember') }}" class="inline">
+                                            @csrf
+                                            <input type="hidden" name="organization_id" value="{{ $org->id }}">
+                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                            <input type="hidden" name="role" value="member">
+                                            <button type="submit" class="text-green-600 dark:text-green-400 hover:text-green-900 font-semibold">
+                                                Rejoindre
+                                            </button>
+                                        </form>
+                                        <!-- Bouton Supprimer -->
 
                                         <!-- Bouton Modifier -->
                                         <a href="{{ route('organizations.edit', $org) }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 font-semibold">
