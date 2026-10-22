@@ -55,7 +55,6 @@
                                                 Rejoindre
                                             </button>
                                         </form>
-                                        <!-- Bouton Supprimer -->
 
                                         <!-- Bouton Modifier -->
                                         <a href="{{ route('organizations.edit', $org) }}" class="text-blue-600 dark:text-blue-400 hover:text-blue-900 font-semibold">
