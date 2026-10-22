@@ -8,8 +8,10 @@ use App\DTOs\Organization\OrganizationMemberDTO;
 use App\Http\Requests\Organization\AddOrganizationMemberRequest;
 use App\Http\Requests\Organization\StoreOrganizationRequest;
 use App\Models\Organization;
+use App\Models\User;
 use App\Models\OrganizationUser;
-
+use App\Actions\Organization\AddOrganizationMemberAction;
+use App\Http\Requests\Organization\UpdateOrganizationRequest;
 
 class OrganizationController extends Controller
 {
@@ -20,12 +22,22 @@ class OrganizationController extends Controller
 
     public function index()
     {
-        return view('organizations.index');
+        $organizations = Organization::paginate(10);
+
+        return view('organizations.index', compact('organizations'));
     }
 
-    public function edit()
+    public function edit(Organization $organization)
     {
-        return view('organizations.edit');
+        return view('organizations.edit', compact('organization'));
+    }
+
+    public function update(UpdateOrganizationRequest $request, Organization $organization)
+    {
+        $organization->update($request->validated());
+
+        return redirect()->route('organizations.index')
+            ->with('success', 'Organisation mise à jour avec succès !');
     }
 
     public function memberList()
@@ -33,11 +45,16 @@ class OrganizationController extends Controller
         return view('organizations.partials.member-list');
     }
 
+    public function showAddMemberForm(Organization $organization)
+    {
+        $users = User::all(); // Pour charger la liste des utilisateurs dans le select
+        return view('organizations.add-member', compact('organization', 'users'));
+    }
+
     public function store(StoreOrganizationRequest $request)
     {
         // Logique pour stocker une nouvelle organisation
         $dto = OrganizationDTO::fromRequest($request);
-
 
         $organization = Organization::create([
             'name' => $dto->name,
@@ -45,29 +62,22 @@ class OrganizationController extends Controller
             'plan' => $dto->plan,
         ]);
 
-        return response()->json([
-            'message' => 'Organisation créée avec succès.',
-            'organization' => $organization
-            ], 201);
+        return redirect()->route('organizations.index')
+            ->with('success', 'Organisation créée avec succès !');
     }
 
-    public function addOrganizationMember(AddOrganizationMemberRequest $request)
+
+    public function addOrganizationMember(
+        AddOrganizationMemberRequest $request, 
+        AddOrganizationMemberAction $action
+    )
     {
-        // Logique pour ajouter un membre à l'organisation
-        // Vous pouvez utiliser un DTO similaire à OrganizationDTO pour encapsuler les données du membre
         $dto = OrganizationMemberDTO::fromRequest($request);
 
-        // Logique pour ajouter le membre à l'organisation
-        $organizationMember = OrganizationUser::create([
-            'organization_id' => $dto->organization_id,
-            'user_id' => $dto->user_id,
-            'role' => $dto->role,
-        ]);
+        $organizationMember = $action->execute($dto);
 
-        return response()->json([
-            'message' => "Membre ajoute a l'organisation avec succes.",
-            'organization_user' => $organizationMember
-        ], 201);
+      return redirect()->route('organizations.index')
+        ->with('success', 'Membre ajouté à l\'organisation avec succès !');
     }
 }
 ?>
