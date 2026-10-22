@@ -53,7 +53,6 @@ class OrganizationController extends Controller
 
     public function store(StoreOrganizationRequest $request)
     {
-        // Logique pour stocker une nouvelle organisation
         $dto = OrganizationDTO::fromRequest($request);
 
         $organization = Organization::create([
@@ -62,10 +61,15 @@ class OrganizationController extends Controller
             'plan' => $dto->plan,
         ]);
 
+        // ✅ Ajouter le créateur comme "owner"
+        $organization->users()->attach(auth()->id(), [
+            'role' => 'owner',
+            'joined_at' => now(),
+        ]);
+
         return redirect()->route('organizations.index')
             ->with('success', 'Organisation créée avec succès !');
     }
-
 
     public function addOrganizationMember(
         AddOrganizationMemberRequest $request, 
