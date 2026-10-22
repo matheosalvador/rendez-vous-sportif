@@ -20,6 +20,15 @@ class OrganizationController extends Controller
         return view('organizations.create');
     }
 
+    public function delete(Organization $organization)
+    {
+        // Supprimer l'organisation
+        $organization->delete();
+
+        return redirect()->route('organizations.index')
+            ->with('success', 'Organisation supprimée avec succès !');
+    }
+
     public function index()
     {
         $organizations = Organization::paginate(10);
