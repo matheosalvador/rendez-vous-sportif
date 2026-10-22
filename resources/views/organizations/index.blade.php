@@ -48,9 +48,6 @@
                                         <!-- Bouton Ajouter un membre -->
                                         <form method="POST" action="{{ route('organizations.addmember') }}" class="inline">
                                             @csrf
-                                            <input type="hidden" name="organization_id" value="{{ $org->id }}">
-                                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                                            <input type="hidden" name="role" value="member">
                                             <button type="submit" class="text-green-600 dark:text-green-400 hover:text-green-900 font-semibold">
                                                 Rejoindre
                                             </button>
